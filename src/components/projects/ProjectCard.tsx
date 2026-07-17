@@ -5,7 +5,7 @@ import { motion, useMotionValue, useSpring, useTransform } from 'framer-motion';
 import { ExternalLink, Code2 } from 'lucide-react';
 import type { Project } from '@/data/projects';
 
-export default function ProjectCard({ project }: { project: Project }) {
+export default function ProjectCard({ project, onClick }: { project: Project, onClick: () => void }) {
   const ref = useRef<HTMLDivElement>(null);
   const [isHovered, setIsHovered] = useState(false);
   
@@ -48,7 +48,8 @@ export default function ProjectCard({ project }: { project: Project }) {
         rotateY,
         transformStyle: "preserve-3d",
       }}
-      className="group relative w-full h-[60vh] md:h-[500px] rounded-3xl bg-white/5 border border-white/10 backdrop-blur-sm overflow-hidden flex flex-col md:flex-row shadow-2xl"
+      className="group relative w-full h-[60vh] md:h-[500px] rounded-3xl bg-white/5 border border-white/10 backdrop-blur-sm overflow-hidden flex flex-col md:flex-row shadow-2xl cursor-pointer"
+      onClick={onClick}
     >
       {/* 3D Inner Content */}
       <div 
@@ -91,7 +92,7 @@ export default function ProjectCard({ project }: { project: Project }) {
             style={{ transform: "translateZ(20px)" }}
             className="text-gray-400 text-lg leading-relaxed"
           >
-            {project.description}
+            {project.smallDescription}
           </p>
 
           <div 
@@ -107,14 +108,11 @@ export default function ProjectCard({ project }: { project: Project }) {
 
           <div 
             style={{ transform: "translateZ(40px)" }}
-            className="flex gap-4 pt-4 mt-auto md:mt-0 pointer-events-auto"
+            className="flex gap-4 pt-4 mt-auto md:mt-0 pointer-events-auto opacity-0 group-hover:opacity-100 transition-opacity duration-300"
           >
-             <button className="w-10 h-10 rounded-full bg-white text-black flex items-center justify-center hover:scale-110 transition-transform">
-                <ExternalLink size={18} />
-             </button>
-             <button className="w-10 h-10 rounded-full bg-white/10 text-white flex items-center justify-center hover:bg-white/20 transition-colors">
-                <Code2 size={18} />
-             </button>
+             <span className="inline-flex items-center gap-2 px-4 py-2 bg-white/10 border border-white/20 text-white rounded-full text-sm font-medium">
+               View Details
+             </span>
           </div>
         </div>
       </div>

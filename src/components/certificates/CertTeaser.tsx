@@ -3,22 +3,24 @@
 import { useState } from 'react';
 import Link from 'next/link';
 import { motion } from 'framer-motion';
-import { certificates } from '@/data/certificates';
+import { certificates, Certificate } from '@/data/certificates';
 import CursorPreview from './CursorPreview';
 import { useTransition } from '@/components/transitions/TransitionContext';
+import CertLightbox from './CertLightbox';
 
 export default function CertTeaser() {
   const [hoveredImage, setHoveredImage] = useState<string | null>(null);
+  const [selectedCert, setSelectedCert] = useState<Certificate | null>(null);
   const teaserCerts = certificates.slice(0, 4); // Only show first 4
   const { navigate } = useTransition();
 
   const handleNavigate = (e: React.MouseEvent<HTMLAnchorElement>) => {
     e.preventDefault();
-    navigate('/certificates');
+    navigate('/certificates', 'forward');
   };
 
   return (
-    <section className="py-24 relative z-10 border-t border-white/5">
+    <section id="certificates" className="py-24 relative z-10 border-t border-white/5">
       <div className="max-w-6xl w-full mx-auto px-6">
         
         <div className="flex flex-col md:flex-row justify-between items-end mb-12 gap-6">
@@ -52,10 +54,10 @@ export default function CertTeaser() {
               }}
 
               onMouseLeave={() => {
-                console.log("LEAVE");
                 setHoveredImage(null);
               }}
-              className="p-6 bg-white/5 border border-white/10 rounded-2xl flex justify-between items-center group cursor-crosshair transition-colors hover:bg-white/10"
+              onClick={() => setSelectedCert(cert)}
+              className="p-6 bg-white/5 border border-white/10 rounded-2xl flex justify-between items-center group cursor-pointer transition-all hover:bg-white/10 hover:-translate-y-1 hover:border-white/20"
             >
               <div>
                 <h4 className="text-lg font-bold text-white mb-1">{cert.title}</h4>
@@ -70,6 +72,11 @@ export default function CertTeaser() {
 
       {/* Floating Cursor Preview */}
       <CursorPreview image={hoveredImage} />
+
+      <CertLightbox 
+        cert={selectedCert} 
+        onClose={() => setSelectedCert(null)} 
+      />
     </section>
   );
 }

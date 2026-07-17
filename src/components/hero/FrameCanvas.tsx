@@ -3,7 +3,6 @@
 import { useEffect, useRef, useState } from 'react';
 import { MotionValue, useMotionValueEvent } from 'framer-motion';
 
-
 interface FrameCanvasProps {
   progress: MotionValue<number>;
 }
@@ -11,91 +10,129 @@ interface FrameCanvasProps {
 export default function FrameCanvas({ progress }: FrameCanvasProps) {
   const canvasRef = useRef<HTMLCanvasElement>(null);
   const [images, setImages] = useState<HTMLImageElement[]>([]);
-  const frameCount = 100;
 
-  // Preload images
+  // Sequence settings
+  const START_FRAME = 27;
+  const END_FRAME = 100;
+  const TOTAL_FRAMES = END_FRAME - START_FRAME + 1;
+
+  // -----------------------
+  // Draw Frame
+  // -----------------------
+  const drawFrame = (img: HTMLImageElement) => {
+    if (!canvasRef.current || !img) return;
+
+    const canvas = canvasRef.current;
+    const ctx = canvas.getContext('2d');
+
+    if (!ctx) return;
+
+    const dpr = window.devicePixelRatio || 1;
+    const rect = canvas.getBoundingClientRect();
+
+    canvas.width = rect.width * dpr;
+    canvas.height = rect.height * dpr;
+
+    // Reset transform before scaling
+    ctx.setTransform(1, 0, 0, 1, 0, 0);
+    ctx.scale(dpr, dpr);
+
+    ctx.clearRect(0, 0, rect.width, rect.height);
+
+    // Contain
+    const scale = Math.min(
+      rect.width / img.width,
+      rect.height / img.height
+    );
+
+    const drawWidth = img.width * scale;
+    const drawHeight = img.height * scale;
+
+    const offsetX = (rect.width - drawWidth) / 2;
+    const offsetY = (rect.height - drawHeight) / 2;
+
+    ctx.drawImage(
+      img,
+      offsetX,
+      offsetY,
+      drawWidth,
+      drawHeight
+    );
+  };
+
+  // -----------------------
+  // Preload Images
+  // -----------------------
   useEffect(() => {
     const loadedImages: HTMLImageElement[] = [];
     let loadedCount = 0;
 
-    for (let i = 1; i <= frameCount; i++) {
+    for (let i = START_FRAME; i <= END_FRAME; i++) {
       const img = new Image();
-      // Format number to 3 digits, e.g., 001.png
-      const frameNum = i.toString().padStart(3, '0');
-      img.src = `/assets/hero-sequence/${frameNum}.png`;
+
+      img.src = `/assets/hero-sequence/${String(i).padStart(3, '0')}.png`;
+
       img.onload = () => {
-        loadedCount= loadedCount + 2;
-        if (loadedCount === frameCount) {
+        loadedCount++;
+
+        if (loadedCount === TOTAL_FRAMES) {
           setImages(loadedImages);
-          // Draw second frame immediately once all are loaded (skip black first frame)
-          drawFrame(loadedImages[1]);
+
+          // Draw first frame immediately
+          drawFrame(loadedImages[0]);
         }
       };
+
+      img.onerror = () => {
+        console.error(`Failed to load frame ${i}`);
+      };
+
       loadedImages.push(img);
     }
   }, []);
 
-  const drawFrame = (img: HTMLImageElement) => {
-    if (!canvasRef.current || !img) return;
-    const canvas = canvasRef.current;
-    const ctx = canvas.getContext('2d');
-    if (!ctx) return;
-
-    // Handle high DPI displays
-    const dpr = window.devicePixelRatio || 1;
-    const rect = canvas.getBoundingClientRect();
-    
-    canvas.width = rect.width * dpr;
-    canvas.height = rect.height * dpr;
-    ctx.scale(dpr, dpr);
-
-    // Calculate scale for 'contain' (letterbox)
-    const scale = Math.min(rect.width / img.width, rect.height / img.height);
-    
-    const drawWidth = img.width * scale;
-    const drawHeight = img.height * scale;
-    const offsetX = (rect.width - drawWidth) / 2;
-    const offsetY = (rect.height - drawHeight) / 2;
-
-    // Clear and draw
-    ctx.clearRect(0, 0, rect.width, rect.height);
-    ctx.drawImage(img, offsetX, offsetY, drawWidth, drawHeight);
-  };
-
-  // Redraw when scroll progress changes
+  // -----------------------
+  // Scroll Animation
+  // -----------------------
   useMotionValueEvent(progress, 'change', (latest) => {
-    if (images.length === 0) return;
-    
-    // Calculate frame index based on progress (0 to 1)
-    // Start at index 1 (frame 2) to avoid black frame
+    if (!images.length) return;
+
     const frameIndex = Math.min(
-      frameCount - 1,
-      Math.max(1, Math.floor(latest * frameCount))
+      images.length - 1,
+      Math.floor(latest * (images.length - 1))
     );
-    
+
     drawFrame(images[frameIndex]);
   });
 
-  // Handle window resize
+  // -----------------------
+  // Handle Resize
+  // -----------------------
   useEffect(() => {
+    if (!images.length) return;
+
     const handleResize = () => {
-      if (images.length === 0) return;
-      const currentProgress = progress.get();
+      const current = progress.get();
+
       const frameIndex = Math.min(
-        frameCount - 1,
-        Math.max(1, Math.floor(currentProgress * frameCount))
+        images.length - 1,
+        Math.floor(current * (images.length - 1))
       );
+
       drawFrame(images[frameIndex]);
     };
 
     window.addEventListener('resize', handleResize);
-    return () => window.removeEventListener('resize', handleResize);
+
+    return () => {
+      window.removeEventListener('resize', handleResize);
+    };
   }, [images, progress]);
 
   return (
-    <canvas 
-      ref={canvasRef} 
-      className="w-full h-full object-cover"
+    <canvas
+      ref={canvasRef}
+      className="w-full h-full"
     />
   );
 }

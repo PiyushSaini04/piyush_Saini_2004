@@ -4,11 +4,14 @@ import { useState, useEffect } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
 
 export default function Loader() {
+  const [mounted, setMounted] = useState(false);
   const [isLoading, setIsLoading] = useState(true);
   const [progress, setProgress] = useState(0);
 
   useEffect(() => {
     // Check if already loaded in this session
+    setMounted(true);
+
     if (sessionStorage.getItem('portfolio-loaded')) {
       setIsLoading(false);
       return;
@@ -31,6 +34,10 @@ export default function Loader() {
 
     return () => clearInterval(interval);
   }, []);
+
+  if (!mounted) {
+    return null;
+  }
 
   const name = "Piyush Saini".split("");
 

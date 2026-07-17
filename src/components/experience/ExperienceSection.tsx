@@ -27,57 +27,35 @@ export default function ExperienceSection() {
       <div className="max-w-6xl w-full mx-auto px-6 ">
           {/* Timeline Column */}
         <div>
-          <motion.h2
-            initial={{ opacity: 0 }}
-            whileInView={{ opacity: 1 }}
+          <motion.h2 
+            initial={{ opacity: 0, y: 20 }}
+            whileInView={{ opacity: 1, y: 0 }}
             viewport={{ once: true }}
-            transition={{ duration: 0.6 }}
-            className="text-4xl md:text-5xl font-bold text-white mb-16 mx-auto text-center"
+            className="text-4xl md:text-5xl font-display font-bold text-white mb-16 text-center lg:text-left"
           >
-            Position of Responsibility
+            Experience
           </motion.h2>
-
-          <motion.div
-            variants={itemVariants}
-            initial="hidden"
-            whileInView="visible"
-            viewport={{ once: true, margin: "-100px" }}
-            className="relative p-8 rounded-2xl border border-white/10 bg-white/5 backdrop-blur-sm"
-          >
-            {/* Date */}
-            <div className="text-gray-400 font-medium mb-2">
-              Mar 2025 – Present
+          <div className="relative pl-8 max-w-2xl mx-auto lg:mx-0">
+            <TimelineDraw />
+            
+            <div className="space-y-16">
+              {experiences.map((exp, index) => (
+                <motion.div 
+                  key={exp.id} 
+                  variants={itemVariants}
+                  initial="hidden"
+                  whileInView="visible"
+                  viewport={{ once: true, margin: "-100px" }}
+                  className="relative z-10"
+                >
+                  <div className="text-gray-300 font-semibold mb-1">{exp.date}</div>
+                  <h3 className="text-2xl font-display font-bold text-white mb-1">{exp.title}</h3>
+                  <div className="text-gray-400 font-medium mb-4">{exp.company}</div>
+                  <p className="text-gray-400 leading-relaxed">{exp.description}</p>
+                </motion.div>
+              ))}
             </div>
-
-            {/* Role */}
-            <h3 className="text-3xl   font-bold text-white mb-2">
-              Tech Lead
-            </h3>
-
-            {/* Organization */}
-            <div className="text-lg text-gray-300 font-semibold mb-6">
-              Optimus Club (LPU)
-            </div>
-
-            {/* Responsibilities */}
-            <ul className="space-y-4 text-gray-400 leading-relaxed list-disc pl-5">
-              <li>
-                Managed a team of 5 developers to build and maintain the club's
-                official web portal, instituting code-review guidelines that
-                reduced merge conflicts by 30%.
-              </li>
-
-              <li>
-                Oversaw end-to-end website development, debugging, and performance
-                optimization, improving load reliability and uptime.
-              </li>
-
-              <li>
-                Coordinated task allocation and sprint planning to ensure timely
-                delivery and adherence to engineering best practices.
-              </li>
-            </ul>
-          </motion.div>
+          </div>
         </div>
       </div>
       <div className="w-full max-w-7xl mx-auto px-6">

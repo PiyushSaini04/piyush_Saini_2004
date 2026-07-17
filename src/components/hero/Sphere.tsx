@@ -7,14 +7,7 @@ export default function AISphere() {
       {/* ================= TOP SPHERE ================= */}
       <div className="absolute top-0 left-[7.5%] w-[26vw] h-[26vw] overflow-hidden">
         <div
-          className="
-            absolute
-            w-[30vw]
-            h-[30vw]
-            rounded-full
-            -top-[16vw]
-            -left-[16vw]
-          "
+          className="absolute w-[30vw] h-[30vw] rounded-full -top-[16vw] -left-[16vw]"
           style={{
             background: `
               radial-gradient(
@@ -63,14 +56,7 @@ export default function AISphere() {
       {/* ================= BOTTOM SPHERE ================= */}
       <div className="absolute bottom-0 right-[7.5%] w-[26vw] h-[26vw] overflow-hidden">
         <div
-          className="
-            absolute
-            w-[30vw]
-            h-[30vw]
-            rounded-full
-            -bottom-[16vw]
-            -right-[16vw]
-          "
+          className="absolute w-[30vw] h-[30vw] rounded-full -bottom-[16vw] -right-[16vw]"
           style={{
             background: `
               radial-gradient(

@@ -2,10 +2,13 @@
 
 import { useRef } from 'react';
 import { motion, useScroll, useTransform, useSpring } from 'framer-motion';
-import { projects } from '@/data/projects';
+import { projects, Project } from '@/data/projects';
 import ProjectCard from './ProjectCard';
+import ProjectModal from './ProjectModal';
+import { useState } from 'react';
 
 export default function ProjectsSection() {
+  const [selectedProject, setSelectedProject] = useState<Project | null>(null);
   const targetRef = useRef<HTMLDivElement>(null);
   const { scrollYProgress } = useScroll({
     target: targetRef,
@@ -38,7 +41,7 @@ export default function ProjectsSection() {
         >
           {projects.map((project) => (
             <div key={project.id} className="w-[80vw] max-w-[1000px] shrink-0">
-              <ProjectCard project={project} />
+              <ProjectCard project={project} onClick={() => setSelectedProject(project)} />
             </div>
           ))}
         </motion.div>
@@ -47,7 +50,7 @@ export default function ProjectsSection() {
         <div className="md:hidden flex flex-col gap-12 px-6 pt-48 pb-24 h-full overflow-y-auto w-full">
           {projects.map((project) => (
             <div key={project.id} className="w-full shrink-0">
-              <ProjectCard project={project} />
+              <ProjectCard project={project} onClick={() => setSelectedProject(project)} />
             </div>
           ))}
         </div>
@@ -81,6 +84,11 @@ export default function ProjectsSection() {
         </div>
 
       </div>
+      
+      <ProjectModal 
+        project={selectedProject} 
+        onClose={() => setSelectedProject(null)} 
+      />
     </section>
   );
 }

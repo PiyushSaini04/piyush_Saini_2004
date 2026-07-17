@@ -1,0 +1,128 @@
+'use client';
+
+import { useRef, useState } from 'react';
+import { motion, useMotionValue, useSpring, useTransform } from 'framer-motion';
+import { ExternalLink, Code2 } from 'lucide-react';
+import type { Project } from '@/data/projects';
+
+export default function ProjectCard({ project }: { project: Project }) {
+  const ref = useRef<HTMLDivElement>(null);
+  const [isHovered, setIsHovered] = useState(false);
+  
+  const x = useMotionValue(0);
+  const y = useMotionValue(0);
+
+  const mouseXSpring = useSpring(x, { stiffness: 300, damping: 20 });
+  const mouseYSpring = useSpring(y, { stiffness: 300, damping: 20 });
+
+  const rotateX = useTransform(mouseYSpring, [-0.5, 0.5], ["7deg", "-7deg"]);
+  const rotateY = useTransform(mouseXSpring, [-0.5, 0.5], ["-7deg", "7deg"]);
+
+  const handleMouseMove = (e: React.MouseEvent<HTMLDivElement>) => {
+    if (!ref.current) return;
+    const rect = ref.current.getBoundingClientRect();
+    const width = rect.width;
+    const height = rect.height;
+    const mouseX = e.clientX - rect.left;
+    const mouseY = e.clientY - rect.top;
+    const xPct = mouseX / width - 0.5;
+    const yPct = mouseY / height - 0.5;
+    x.set(xPct);
+    y.set(yPct);
+  };
+
+  const handleMouseLeave = () => {
+    setIsHovered(false);
+    x.set(0);
+    y.set(0);
+  };
+
+  return (
+    <motion.div
+      ref={ref}
+      onMouseMove={handleMouseMove}
+      onMouseEnter={() => setIsHovered(true)}
+      onMouseLeave={handleMouseLeave}
+      style={{
+        rotateX,
+        rotateY,
+        transformStyle: "preserve-3d",
+      }}
+      className="group relative w-full h-[60vh] md:h-[500px] rounded-3xl bg-white/5 border border-white/10 backdrop-blur-sm overflow-hidden flex flex-col md:flex-row shadow-2xl"
+    >
+      {/* 3D Inner Content */}
+      <div 
+        style={{ transform: "translateZ(50px)", transformStyle: "preserve-3d" }}
+        className="w-full h-full flex flex-col md:flex-row relative z-10 p-1 pointer-events-none"
+      >
+        {/* Image Side */}
+        <div className="w-full md:w-1/2 h-1/2 md:h-full p-6 pb-0 md:pb-6 md:pr-0">
+          <div className="w-full h-full rounded-2xl overflow-hidden bg-white/5 border border-white/10 relative">
+             <div className="absolute inset-0 bg-gradient-to-tr from-white/10 to-gray-500/10 flex items-center justify-center">
+                {/* Fallback text if image missing */}
+                <span className="text-gray-500 font-display font-semibold tracking-widest uppercase">
+                  {project.title.substring(0,2)}
+                </span>
+             </div>
+             {/* Actual Image if it exists */}
+             <div 
+                className="absolute inset-0 bg-cover bg-center bg-cover opacity-80  transition-all duration-500"
+                style={{ 
+                  backgroundImage: `url(${project.image})`,
+                  transform: isHovered ? 'scale(1.05)' : 'scale(1)'
+                }} 
+              />
+          </div>
+        </div>
+
+        {/* Text Side */}
+        <div className="w-full md:w-1/2 h-1/2 md:h-full p-8 md:p-12 flex flex-col justify-center gap-6">
+          <h3 
+            style={{ transform: "translateZ(30px)" }}
+            className="text-3xl font-display font-bold text-white transition-all duration-300"
+          >
+            {project.title}
+          </h3>
+          <div style={{ transform: "translateZ(20px)" }} className="text-sm text-gray-500 uppercase tracking-wider">
+            {project.date}
+          </div>
+          
+          <p 
+            style={{ transform: "translateZ(20px)" }}
+            className="text-gray-400 text-lg leading-relaxed"
+          >
+            {project.description}
+          </p>
+
+          <div 
+            style={{ transform: "translateZ(25px)" }}
+            className="flex flex-wrap gap-2 pt-2"
+          >
+            {project.tags.map(tag => (
+              <span key={tag} className="px-3 py-1 rounded-full bg-white/5 border border-white/10 text-xs text-gray-300">
+                {tag}
+              </span>
+            ))}
+          </div>
+
+          <div 
+            style={{ transform: "translateZ(40px)" }}
+            className="flex gap-4 pt-4 mt-auto md:mt-0 pointer-events-auto"
+          >
+             <button className="w-10 h-10 rounded-full bg-white text-black flex items-center justify-center hover:scale-110 transition-transform">
+                <ExternalLink size={18} />
+             </button>
+             <button className="w-10 h-10 rounded-full bg-white/10 text-white flex items-center justify-center hover:bg-white/20 transition-colors">
+                <Code2 size={18} />
+             </button>
+          </div>
+        </div>
+      </div>
+      
+      {/* Background glow on hover */}
+      <div 
+        className="absolute -inset-20 bg-gradient-to-r from-white/10 via-gray-400/10 to-white/10 blur-3xl opacity-0 group-hover:opacity-100 transition-opacity duration-500 pointer-events-none" 
+      />
+    </motion.div>
+  );
+}

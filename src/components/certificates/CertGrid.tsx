@@ -16,7 +16,8 @@ export default function CertGrid() {
         >
           <div className="aspect-[4/3] bg-black/50 relative overflow-hidden">
             <div className="absolute inset-0 bg-gradient-to-tr from-white/10 to-transparent flex items-center justify-center">
-                <span className="text-gray-500 font-medium">Certificate Image</span>
+                {/* <span className="text-gray-500 font-medium">Certificate Image</span> */}
+                <img src={cert.image} alt={cert.title} className="w-full h-full object-cover" />
             </div>
             {/* Real image if available */}
             <div 

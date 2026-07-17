@@ -18,7 +18,7 @@ export default function SkillsSection() {
     <section id="skills" className="min-h-screen py-24 relative z-10 flex flex-col items-center justify-center overflow-hidden">
       <div className="max-w-6xl w-full mx-auto px-6">
         <div className="text-center mb-16">
-          <h2 className="text-4xl md:text-5xl font-display font-bold text-white">
+          <h2 className="text-4xl md:text-5xl   font-bold text-white">
             Technical Arsenal
           </h2>
         </div>

@@ -1,3 +1,4 @@
+
 'use client';
 
 import { useRef } from 'react';
@@ -23,7 +24,7 @@ export default function EducationSection() {
             initial={{ opacity: 0, y: 20 }}
             whileInView={{ opacity: 1, y: 0 }}
             viewport={{ once: true }}
-            className="text-4xl md:text-5xl font-display font-bold text-white mb-4"
+            className="text-4xl md:text-5xl   font-bold text-white mb-4"
           >
             Academic Journey
           </motion.h2>
@@ -55,7 +56,7 @@ export default function EducationSection() {
                     className={`w-full md:w-1/2 p-6 md:p-8 bg-white/5 border border-white/10 rounded-2xl backdrop-blur-sm ${isEven ? 'md:ml-12' : 'md:mr-12'}`}
                   >
                     <div className="text-gray-400 font-semibold mb-2 text-sm uppercase tracking-wider">{edu.date}</div>
-                    <h3 className="text-2xl font-display font-bold text-white mb-2">{edu.degree}</h3>
+                    <h3 className="text-2xl   font-bold text-white mb-2">{edu.degree}</h3>
                     <div className="text-gray-300 font-medium mb-4">{edu.school}</div>
                     {edu.description && <p className="text-gray-400">{edu.description}</p>}
                   </motion.div>

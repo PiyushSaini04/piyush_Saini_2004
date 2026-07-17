@@ -23,7 +23,7 @@ export default function CertTeaser() {
         
         <div className="flex flex-col md:flex-row justify-between items-end mb-12 gap-6">
           <div>
-            <h2 className="text-4xl md:text-5xl font-display font-bold text-white mb-4">
+            <h2 className="text-4xl md:text-5xl   font-bold text-white mb-4">
               Certifications
             </h2>
             <p className="text-gray-400">Continuous learning and skill validation.</p>
@@ -46,8 +46,15 @@ export default function CertTeaser() {
               whileInView={{ opacity: 1, y: 0 }}
               viewport={{ once: true, margin: "-50px" }}
               transition={{ duration: 0.5, delay: index * 0.1 }}
-              onMouseEnter={() => setHoveredImage(cert.image)}
-              onMouseLeave={() => setHoveredImage(null)}
+              onMouseEnter={() => {
+                console.log("ENTER:", cert.image);
+                setHoveredImage(cert.image);
+              }}
+
+              onMouseLeave={() => {
+                console.log("LEAVE");
+                setHoveredImage(null);
+              }}
               className="p-6 bg-white/5 border border-white/10 rounded-2xl flex justify-between items-center group cursor-crosshair transition-colors hover:bg-white/10"
             >
               <div>

@@ -24,6 +24,7 @@ export default function CursorPreview({ image }: { image: string | null }) {
   }, [cursorX, cursorY]);
 
   useEffect(() => {
+    console.log("Hovered Image:", image);
     if (image) {
       setIsVisible(true);
     } else {
@@ -33,7 +34,7 @@ export default function CursorPreview({ image }: { image: string | null }) {
 
   return (
     <motion.div
-      className="fixed top-0 left-0 w-64 h-48 rounded-xl overflow-hidden pointer-events-none z-50 shadow-2xl border border-white/20 bg-black/50 backdrop-blur-md hidden md:block"
+      className="fixed top-0 left-0 w-64 h-48 overflow-hidden pointer-events-none z-50 shadow-2xl border backdrop-blur-md hidden md:block"
       style={{
         x: cursorXSpring,
         y: cursorYSpring,
@@ -45,9 +46,10 @@ export default function CursorPreview({ image }: { image: string | null }) {
       transition={{ opacity: { duration: 0.2 }, scale: { duration: 0.2 } }}
     >
       {image && (
-        <div 
-          className="w-full h-full bg-cover bg-center"
-          style={{ backgroundImage: `url(${image})` }}
+        <img
+          src={image}
+          alt="Certificate Preview"
+          className="w-full h-full object-cover"
         />
       )}
     </motion.div>

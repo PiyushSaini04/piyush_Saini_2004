@@ -32,7 +32,7 @@ export default function ExperienceSection() {
             whileInView={{ opacity: 1 }}
             viewport={{ once: true }}
             transition={{ duration: 0.6 }}
-            className="text-4xl md:text-5xl font-display font-bold text-white mb-16 mx-auto text-center"
+            className="text-4xl md:text-5xl font-bold text-white mb-16 mx-auto text-center"
           >
             Position of Responsibility
           </motion.h2>
@@ -50,7 +50,7 @@ export default function ExperienceSection() {
             </div>
 
             {/* Role */}
-            <h3 className="text-3xl font-display font-bold text-white mb-2">
+            <h3 className="text-3xl   font-bold text-white mb-2">
               Tech Lead
             </h3>
 
@@ -86,7 +86,7 @@ export default function ExperienceSection() {
           initial={{ opacity: 0, y: 20 }}
           whileInView={{ opacity: 1, y: 0 }}
           viewport={{ once: true }}
-          className="text-4xl md:text-5xl font-display font-bold text-white my-16 mx-auto text-center h-fit"
+          className="text-4xl md:text-5xl   font-bold text-white my-16 mx-auto text-center h-fit"
         >
           Coding Profiles
         </motion.h2>

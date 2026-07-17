@@ -26,7 +26,7 @@ export default function ProjectsSection() {
         
         {/* Title */}
         <div className="absolute top-4 left-6 md:left-24 z-10 pointer-events-none">
-          <h2 className="text-4xl md:text-5xl font-display font-bold text-white">
+          <h2 className="text-4xl md:text-5xl   font-bold text-white">
             Projects
           </h2>
         </div>

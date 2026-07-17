@@ -109,7 +109,7 @@ export const projects: Project[] = [
   },
 
   {
-    id: "proj-6",
+    id: "proj-7",
     title: "Drone vs Bird Detection System",
     description:
       "A custom-trained YOLOv8 model optimized for high-altitude target identification, capable of distinguishing drones and birds in complex aerial environments with real-time inference.",

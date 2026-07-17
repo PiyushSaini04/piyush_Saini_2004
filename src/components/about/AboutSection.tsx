@@ -52,9 +52,13 @@ export default function AboutSection() {
           
           {/* Profile Image Placeholder */}
           <div className="w-64 h-64 md:w-80 md:h-80 shrink-0 rounded-2xl overflow-hidden border border-white/10 bg-white/5 relative">
-             <div className="absolute inset-0 bg-gradient-to-tr from-white/10 to-transparent flex items-center justify-center">
-                <span className="text-gray-500">Profile Image</span>
-             </div>
+            <div className="absolute inset-0 bg-gradient-to-tr from-white/10 to-transparent flex items-center justify-center">
+              <img
+                src="/assets/profile/IMG20260120123304.jpg"
+                alt="Profile"
+                className="w-full h-full object-cover"
+              />
+            </div>
           </div>
           
         </div>

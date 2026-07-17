@@ -51,7 +51,7 @@ export function PageTransitionProvider({ children }: { children: ReactNode }) {
               onAnimationComplete={handleAnimationComplete}
               className="fixed inset-0 z-[100] bg-white flex items-center justify-center pointer-events-none"
             >
-              <h1 className="text-6xl md:text-8xl font-display font-bold text-black text-center">
+              <h1 className="text-6xl md:text-8xl   font-bold text-black text-center">
                 Piyush Saini
               </h1>
             </motion.div>

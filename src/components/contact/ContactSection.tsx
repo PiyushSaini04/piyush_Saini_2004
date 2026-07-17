@@ -32,7 +32,7 @@ export default function ContactSection() {
             whileInView="visible"
             viewport={{ once: true, margin: "-100px" }}
           >
-            <motion.h2 variants={itemVariants} className="text-4xl md:text-5xl font-display font-bold text-white mb-6">
+            <motion.h2 variants={itemVariants} className="text-4xl md:text-5xl   font-bold text-white mb-6">
               Let's create something together.
             </motion.h2>
             

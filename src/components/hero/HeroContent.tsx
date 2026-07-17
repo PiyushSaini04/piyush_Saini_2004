@@ -25,7 +25,7 @@ export default function HeroContent({ progress }: HeroContentProps) {
     <div className="w-full max-w-6xl mx-auto px-6 grid grid-cols-1 md:grid-cols-2 gap-8 items-center h-full pt-32">
       <div className="flex flex-col items-start gap-6 pointer-events-auto">
         <motion.div style={{ opacity: headlineOpacity, y: headlineY }}>
-          <h1 className="text-5xl md:text-7xl font-display font-bold leading-tight">
+          <h1 className="text-5xl md:text-7xl   font-bold leading-tight">
             Building digital <br/>
             <span className="bg-clip-text text-transparent bg-gradient-to-r from-white to-gray-400">
               experiences
@@ -55,15 +55,15 @@ export default function HeroContent({ progress }: HeroContentProps) {
       {/* Right side stats */}
       <div className="hidden md:flex flex-col items-end gap-12 pointer-events-auto">
         <motion.div style={{ opacity: ctaOpacity, y: ctaY }} className="text-right">
-          <div className="text-4xl font-display font-bold text-white">7.81</div>
+          <div className="text-4xl   font-bold text-white">7.81</div>
           <div className="text-gray-400 uppercase tracking-widest text-sm">CGPA</div>
         </motion.div>
         <motion.div style={{ opacity: ctaOpacity, y: ctaY }} className="text-right">
-          <div className="text-4xl font-display font-bold text-white">250+</div>
+          <div className="text-4xl   font-bold text-white">250+</div>
           <div className="text-gray-400 uppercase tracking-widest text-sm">DSA Problems</div>
         </motion.div>
         <motion.div style={{ opacity: ctaOpacity, y: ctaY }} className="text-right">
-          <div className="text-4xl font-display font-bold text-white">2</div>
+          <div className="text-4xl   font-bold text-white">2</div>
           <div className="text-gray-400 uppercase tracking-widest text-sm">Certificates</div>
         </motion.div>
       </div>

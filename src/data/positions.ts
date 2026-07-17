@@ -29,6 +29,14 @@ export const positions: Position[] = [
       "Improved load reliability and overall platform uptime",
       "Successfully launched the new official web portal"
     ],
-    images: [] // Placeholders or real images can be added here later
+    images: [
+      "/assets/positions/WhatsApp Image 2026-07-18 at 00.53.20.jpeg",
+  "/assets/positions/WhatsApp Image 2026-07-18 at 00.53.20 (1).jpeg",
+  "/assets/positions/WhatsApp Image 2026-07-18 at 00.53.21.jpeg",
+  "/assets/positions/WhatsApp Image 2026-07-18 at 00.53.21 (1).jpeg",
+  "/assets/positions/WhatsApp Image 2026-07-18 at 00.53.21 (2).jpeg",
+  
+  "/assets/positions/WhatsApp Image 2026-07-18 at 00.53.22 (2).jpeg",
+    ] // Placeholders or real images can be added here later
   }
 ];

@@ -31,7 +31,7 @@ export default function PositionModal({ position, onClose }: PositionModalProps)
     if (!position || !position.images || position.images.length <= 1 || isHovered) return;
     
     const timer = setInterval(() => {
-      setCurrentImageIndex((prev) => (prev + 1) % position.images.length);
+      setCurrentImageIndex((prev) => (prev + 2) % position.images.length);
     }, 4000);
     
     return () => clearInterval(timer);
@@ -39,12 +39,12 @@ export default function PositionModal({ position, onClose }: PositionModalProps)
 
   const handleNext = () => {
     if (!position || !position.images) return;
-    setCurrentImageIndex((prev) => (prev + 1) % position.images.length);
+    setCurrentImageIndex((prev) => (prev + 2) % position.images.length);
   };
 
   const handlePrev = () => {
     if (!position || !position.images) return;
-    setCurrentImageIndex((prev) => (prev - 1 + position.images.length) % position.images.length);
+    setCurrentImageIndex((prev) => (prev - 2 + position.images.length) % position.images.length);
   };
 
   return (
@@ -90,16 +90,31 @@ export default function PositionModal({ position, onClose }: PositionModalProps)
                 ) : (
                   <>
                     <AnimatePresence mode="wait">
-                      <motion.img
+                      <motion.div
                         key={currentImageIndex}
-                        src={position.images[currentImageIndex]}
-                        alt={`${position.role} at ${position.organization}`}
-                        initial={{ opacity: 0 }}
-                        animate={{ opacity: 1 }}
-                        exit={{ opacity: 0 }}
-                        transition={{ duration: 0.5 }}
-                        className="absolute inset-0 w-full h-full object-cover"
-                      />
+                        initial={{ x: "100%", opacity: 0 }}
+                        animate={{ x: 0, opacity: 1 }}
+                        exit={{ x: "-100%", opacity: 0 }}
+                        transition={{
+                          duration: 0.55,
+                          ease: [0.22, 1, 0.36, 1],
+                        }}
+                        className="absolute inset-0 grid grid-cols-2 gap-2 p-2 h-16"
+                      >
+                        {[0, 1].map((offset) => {
+                          const index =
+                            (currentImageIndex + offset) % position.images.length;
+
+                          return (
+                            <img
+                              key={index}
+                              src={position.images[index]}
+                              alt=""
+                              className="object-contain rounded-xl bg-[#0a0a0a]"
+                            />
+                          );
+                        })}
+                      </motion.div>
                     </AnimatePresence>
 
                     {/* Slideshow Controls */}
@@ -120,12 +135,14 @@ export default function PositionModal({ position, onClose }: PositionModalProps)
                         
                         {/* Dots */}
                         <div className="absolute bottom-4 left-1/2 -translate-x-1/2 flex gap-2">
-                          {position.images.map((_, idx) => (
+                          {Array.from({
+                              length: Math.ceil(position.images.length / 2),
+                            }).map((_, idx) => (
                             <button
                               key={idx}
-                              onClick={() => setCurrentImageIndex(idx)}
+                              onClick={() => setCurrentImageIndex(idx*2)}
                               className={`w-2 h-2 rounded-full transition-all ${
-                                idx === currentImageIndex ? 'bg-white w-4' : 'bg-white/50 hover:bg-white/80'
+                                idx * 2 === currentImageIndex ? 'bg-white w-4' : 'bg-white/50 hover:bg-white/80'
                               }`}
                             />
                           ))}

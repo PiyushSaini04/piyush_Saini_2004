@@ -21,7 +21,7 @@ export default function HeroSection() {
   });
 
   return (
-    <section ref={containerRef} className="relative h-[300vh]">
+    <section ref={containerRef} className="relative h-[300vh] bg-black">
       <div className="sticky top-0 h-screen w-full overflow-hidden">
         {/* Frame Sequence Canvas */}
         <div className="absolute inset-0 z-0">

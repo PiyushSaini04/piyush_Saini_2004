@@ -140,7 +140,7 @@ export default function ProjectModal({ project, onClose }: ProjectModalProps) {
                   </div>
 
                   {/* Links */}
-                  <div className="flex gap-4 mb-8">
+                  <div className="flex gap-4 mb-1">
                     {project.link && (
                       <a
                         href={project.link}
@@ -166,10 +166,10 @@ export default function ProjectModal({ project, onClose }: ProjectModalProps) {
                   </div>
                 </div>
 
-                <div className="space-y-8 text-gray-300 leading-relaxed">
+                <div className="whitespace-pre-line space-y-8 text-gray-300 leading-relaxed">
                   {/* Full Description */}
                   <div>
-                    <h3 className="text-xl font-bold text-white mb-4">Overview</h3>
+                    <h3 className=" text-xl font-bold text-white mb-4">Overview</h3>
                     <p>{project.description}</p>
                   </div>
 

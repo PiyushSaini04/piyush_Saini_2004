@@ -20,7 +20,7 @@ export default function CertTeaser() {
   };
 
   return (
-    <section id="certificates" className="py-24 relative z-10 border-t border-white/5">
+    <section id="certificates" className="py-24 relative z-10">
       <div className="max-w-6xl w-full mx-auto px-6">
         
         <div className="flex flex-col md:flex-row justify-between items-end mb-12 gap-6">

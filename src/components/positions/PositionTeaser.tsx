@@ -16,7 +16,7 @@ export default function PositionTeaser() {
   if (!position) return null;
 
   return (
-    <section className="py-24 relative z-10 border-t border-white/5 bg-black">
+    <section className="py-24 relative z-10">
       <div className="max-w-6xl w-full mx-auto px-6">
         
         <div className="mb-12 text-center md:text-left">

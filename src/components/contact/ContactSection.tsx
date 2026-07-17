@@ -20,7 +20,7 @@ export default function ContactSection() {
   };
 
   return (
-    <section id="contact" className="pt-24 relative z-10 border-t border-white/5">
+    <section id="contact" className="pt-24 relative z-10">
       <div className="max-w-6xl w-full mx-auto px-6 pb-24">
         
         <div className="grid grid-cols-1 lg:grid-cols-2 gap-16">

@@ -9,13 +9,11 @@ import PositionTeaser from "@/components/positions/PositionTeaser";
 import EducationSection from "@/components/education/EducationSection";
 import CertTeaser from "@/components/certificates/CertTeaser";
 import ContactSection from "@/components/contact/ContactSection";
-import ParticleCanvas from "@/components/background/ParticleCanvas";
 
 export default function Home() {
   return (
     <main className="flex flex-col min-h-screen relative">
       <Loader />
-      <ParticleCanvas />
       <Navbar />
       
       <HeroSection />

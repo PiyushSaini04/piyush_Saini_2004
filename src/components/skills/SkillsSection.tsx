@@ -43,9 +43,7 @@ export default function SkillsSection() {
           backgroundSize: '40px 40px'
         }}
       />
-      {/* Gradient fades for the grid */}
-      <div className="absolute inset-0 z-0 bg-gradient-to-b from-black via-transparent to-black pointer-events-none" />
-      <div className="absolute inset-0 z-0 bg-gradient-to-r from-black via-transparent to-black pointer-events-none" />
+      
 
       <div className="max-w-5xl w-full mx-auto px-6 relative z-10">
         <motion.div 

@@ -24,7 +24,7 @@ export default function ProjectsSection() {
   const x = useTransform(smoothProgress, [0, 1], ["0%", "-75%"]);
 
   return (
-    <section id="projects" ref={targetRef} className="relative h-[400vh] bg-black z-20">
+    <section id="projects" ref={targetRef} className="relative h-[400vh]">
       <div className="sticky top-10 h-screen flex items-center overflow-hidden">
         
         {/* Title */}

@@ -1,24 +1,31 @@
 'use client';
 
-import { useState } from 'react';
-import Link from 'next/link';
+import { useState, useEffect } from 'react';import Link from 'next/link';
 import { motion } from 'framer-motion';
 import { certificates, Certificate } from '@/data/certificates';
 import CursorPreview from './CursorPreview';
 import { useTransition } from '@/components/transitions/TransitionContext';
 import CertLightbox from './CertLightbox';
 
+
 export default function CertTeaser() {
   const [hoveredImage, setHoveredImage] = useState<string | null>(null);
   const [selectedCert, setSelectedCert] = useState<Certificate | null>(null);
-  const [isdesktop, setIsDesktop] = useState<boolean>(true);
+  const [isDesktop, setIsDesktop] = useState(true);
 
-  const x = window.innerWidth;
-  if (x < 768 && isdesktop) {
-    setIsDesktop(false);
-  } else if (x >= 768 && !isdesktop) {
-    setIsDesktop(true);
-  }
+  useEffect(() => {
+    const checkScreen = () => {
+      setIsDesktop(window.innerWidth >= 768);
+    };
+
+    checkScreen(); // Initial check
+
+    window.addEventListener('resize', checkScreen);
+
+    return () => {
+      window.removeEventListener('resize', checkScreen);
+    };
+  }, []);
 
   const teaserCerts = certificates.slice(0, 4); // Only show first 4
   const { navigate } = useTransition();
@@ -40,7 +47,7 @@ export default function CertTeaser() {
             <p className="text-gray-400 text-sm md:text-base">Continuous learning and skill validation.</p>
           </div>
           
-          {isdesktop && (
+          {isDesktop && (
             <a 
               href="/certificates"
               onClick={handleNavigate}
@@ -79,7 +86,7 @@ export default function CertTeaser() {
             </motion.div>
           ))}
         </div>
-        {!isdesktop && (
+        {!isDesktop && (
             <a 
               href="/certificates"
               onClick={handleNavigate}

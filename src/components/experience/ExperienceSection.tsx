@@ -23,22 +23,22 @@ export default function ExperienceSection() {
   };
 
   return (
-    <section id="experience" className="min-h-screen py-24 relative z-10">
-      <div className="max-w-6xl w-full mx-auto px-6 ">
+    <section id="experience" className="py-16 md:py-24 relative z-10">
+      <div className="max-w-6xl w-full mx-auto px-4 sm:px-6">
           {/* Timeline Column */}
         <div>
           <motion.h2 
             initial={{ opacity: 0, y: 20 }}
             whileInView={{ opacity: 1, y: 0 }}
             viewport={{ once: true }}
-            className="text-4xl md:text-5xl font-display font-bold text-white mb-16 text-center lg:text-left"
+            className="text-3xl md:text-4xl lg:text-5xl font-display font-bold text-white mb-10 md:mb-16 text-center lg:text-left"
           >
             Experience
           </motion.h2>
           <div className="relative pl-8 max-w-2xl mx-auto lg:mx-0">
             <TimelineDraw />
             
-            <div className="space-y-16">
+            <div className="space-y-10 md:space-y-16">
               {experiences.map((exp, index) => (
                 <motion.div 
                   key={exp.id} 
@@ -58,19 +58,19 @@ export default function ExperienceSection() {
           </div>
         </div>
       </div>
-      <div className="w-full max-w-7xl mx-auto px-6">
+      <div className="w-full max-w-7xl mx-auto px-4 sm:px-6">
         {/* Heading */}
         <motion.h2
           initial={{ opacity: 0, y: 20 }}
           whileInView={{ opacity: 1, y: 0 }}
           viewport={{ once: true }}
-          className="text-4xl md:text-5xl   font-bold text-white my-16 mx-auto text-center h-fit"
+          className="text-3xl md:text-4xl lg:text-5xl font-bold text-white my-10 md:my-16 mx-auto text-center h-fit"
         >
           Coding Profiles
         </motion.h2>
 
         {/* Achievement Cards */}
-        <div className="grid grid-cols-1 lg:grid-cols-2 gap-12">
+        <div className="grid grid-cols-1 lg:grid-cols-2 gap-8 md:gap-12">
           {/* LeetCode Section */}
           <div className="space-y-6">
             {/* Stats (solved, rank, contest, languages, skills all-in-one) */}
@@ -87,12 +87,12 @@ export default function ExperienceSection() {
               />
             </motion.div>
 
-            {/* Heatmap */}
             <motion.div
               initial={{ opacity: 0, x: 20 }}
               whileInView={{ opacity: 1, x: 0 }}
               viewport={{ once: true, margin: "-50px" }}
               transition={{ duration: 0.5, delay: 0.1 }}
+              className="w-full overflow-x-auto overflow-y-hidden"
             >
               <LeetCodeHeatmap
                 data={leetCodeData}
@@ -135,6 +135,7 @@ export default function ExperienceSection() {
               whileInView={{ opacity: 1, x: 0 }}
               viewport={{ once: true, margin: "-50px" }}
               transition={{ duration: 0.5, delay: 0.4 }}
+              className="w-full overflow-x-auto overflow-y-hidden"
             >
               <GitHubHeatmap
                 data={gitHubData}

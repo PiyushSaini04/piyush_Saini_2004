@@ -22,7 +22,7 @@ export default function HeroSection() {
 
   return (
     <section ref={containerRef} className="relative h-[300vh] bg-black">
-      <div className="sticky top-0 h-screen w-full overflow-hidden">
+      <div className="sticky top-0 h-screen w-full overflow-hidden md:pt-0 pt-100">
         {/* Frame Sequence Canvas */}
         <div className="absolute inset-0 z-0">
           <div className="absolute inset-0 z-5">
@@ -35,7 +35,7 @@ export default function HeroSection() {
 
         {/* Cinematic vignette */}
         <div
-          className="absolute inset-0 mx-[7%] pointer-events-none"
+          className="absolute inset-0 md:mx-[7%] pointer-events-none mx-[0]"
           style={{
             boxShadow: `
               inset 120px 0 120px -60px rgba(0, 0, 0, 0.9),

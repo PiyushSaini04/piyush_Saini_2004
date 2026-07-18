@@ -54,7 +54,7 @@ export default function ProjectModal({ project, onClose }: ProjectModalProps) {
               animate={{ opacity: 1, scale: 1, y: 0 }}
               exit={{ opacity: 0, scale: 0.94, y: 16 }}
               transition={{ duration: 0.35, ease: [0.25, 0.46, 0.45, 0.94] }}
-              className="relative w-full max-w-6xl h-[90vh] bg-[#111111] border border-white/10 rounded-3xl overflow-hidden shadow-2xl flex flex-col lg:flex-row"
+              className="relative w-full max-w-6xl h-[90vh] md:h-[80vh] lg:h-[90vh] bg-[#111111] border border-white/10 rounded-2xl md:rounded-3xl overflow-hidden shadow-2xl flex flex-col lg:flex-row"
               onClick={(e) => e.stopPropagation()} // Prevent close on inner click
             >
               {/* Close Button */}
@@ -66,7 +66,7 @@ export default function ProjectModal({ project, onClose }: ProjectModalProps) {
               </button>
 
               {/* Left Panel: Image Gallery (45%) */}
-              <div className="w-full lg:w-[45%] bg-black/50 p-6 lg:p-8 flex flex-col justify-center gap-4 relative">
+              <div className="w-full lg:w-[45%] bg-black/50 p-4 sm:p-6 lg:p-8 flex flex-col justify-center gap-4 relative shrink-0">
                 {/* Main Image */}
                 <div className="relative w-full aspect-video lg:aspect-square rounded-2xl overflow-hidden bg-white/5 border border-white/10 group">
                   <div className="absolute inset-0 bg-gradient-to-tr from-white/5 to-transparent opacity-50 z-0" />
@@ -122,16 +122,16 @@ export default function ProjectModal({ project, onClose }: ProjectModalProps) {
               </div>
 
               {/* Right Panel: Content (55%) */}
-              <div className="w-full lg:w-[55%] p-6 lg:p-10 flex flex-col bg-white/5 overflow-y-auto max-h-[60vh] lg:max-h-none scrollbar-thin scrollbar-thumb-white/10 scrollbar-track-transparent">
+              <div className="w-full lg:w-[55%] p-4 sm:p-6 lg:p-10 flex flex-col bg-white/5 overflow-y-auto scrollbar-thin scrollbar-thumb-white/10 scrollbar-track-transparent">
                 <div className="mb-8 pr-8">
-                  <h2 className="text-3xl md:text-4xl font-display font-bold text-white mb-3">
+                  <h2 className="text-2xl md:text-4xl font-display font-bold text-white mb-2 md:mb-3">
                     {project.title}
                   </h2>
                   <div className="text-gray-400 font-medium tracking-wide uppercase text-sm mb-6">
                     {project.date}
                   </div>
 
-                  <div className="flex flex-wrap gap-2 mb-8">
+                  <div className="flex flex-wrap gap-2 mb-6 md:mb-8">
                     {project.tags.map(tag => (
                       <span key={tag} className="px-3 py-1 rounded-full bg-white/10 border border-white/5 text-xs text-gray-300">
                         {tag}

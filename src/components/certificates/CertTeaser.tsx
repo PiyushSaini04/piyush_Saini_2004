@@ -20,15 +20,15 @@ export default function CertTeaser() {
   };
 
   return (
-    <section id="certificates" className="py-24 relative z-10">
-      <div className="max-w-6xl w-full mx-auto px-6">
+    <section id="certificates" className="py-16 md:py-24 relative z-10">
+      <div className="max-w-6xl w-full mx-auto px-4 sm:px-6">
         
         <div className="flex flex-col md:flex-row justify-between items-end mb-12 gap-6">
           <div>
-            <h2 className="text-4xl md:text-5xl   font-bold text-white mb-4">
+            <h2 className="text-3xl md:text-4xl lg:text-5xl font-bold text-white mb-2 md:mb-4">
               Certifications
             </h2>
-            <p className="text-gray-400">Continuous learning and skill validation.</p>
+            <p className="text-gray-400 text-sm md:text-base">Continuous learning and skill validation.</p>
           </div>
           
           <a 
@@ -40,7 +40,7 @@ export default function CertTeaser() {
           </a>
         </div>
 
-        <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
+        <div className="grid grid-cols-1 md:grid-cols-2 gap-4 md:gap-6">
           {teaserCerts.map((cert, index) => (
             <motion.div 
               key={cert.id}
@@ -57,13 +57,13 @@ export default function CertTeaser() {
                 setHoveredImage(null);
               }}
               onClick={() => setSelectedCert(cert)}
-              className="p-6 bg-white/5 border border-white/10 rounded-2xl flex justify-between items-center group cursor-pointer transition-all hover:bg-white/10 hover:-translate-y-1 hover:border-white/20"
+              className="p-4 md:p-6 bg-white/5 border border-white/10 rounded-xl md:rounded-2xl flex justify-between items-center group cursor-pointer transition-all hover:bg-white/10 hover:-translate-y-1 hover:border-white/20"
             >
               <div>
-                <h4 className="text-lg font-bold text-white mb-1">{cert.title}</h4>
-                <div className="text-gray-400">{cert.issuer}</div>
+                <h4 className="text-base md:text-lg font-bold text-white mb-1">{cert.title}</h4>
+                <div className="text-gray-400 text-sm md:text-base">{cert.issuer}</div>
               </div>
-              <div className="text-gray-300 font-medium">{cert.date}</div>
+              <div className="text-gray-300 font-medium text-sm md:text-base ml-2 shrink-0">{cert.date}</div>
             </motion.div>
           ))}
         </div>

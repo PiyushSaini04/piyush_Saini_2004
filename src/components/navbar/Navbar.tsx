@@ -1,7 +1,9 @@
 'use client';
 
 import { useState, useRef, useEffect } from 'react';
-import { motion, useScroll, useMotionValueEvent } from 'framer-motion';
+import { motion, useScroll, useMotionValueEvent, AnimatePresence } from 'framer-motion';
+import { Menu, X } from 'lucide-react';
+import { useKeyboard } from '@/hooks/useKeyboard';
 
 const navItems = [
   { name: 'Home', href: '#' },
@@ -18,31 +20,100 @@ export default function Navbar() {
   const { scrollY } = useScroll();
   const [isScrolled, setIsScrolled] = useState(false);
   const [activeItem, setActiveItem] = useState('Home');
+  const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
 
   useMotionValueEvent(scrollY, "change", (latest) => {
     setIsScrolled(latest > 50);
-    // In a real app, calculate intersection of sections to update activeItem
   });
 
+  // Lock body scroll when mobile menu is open
+  useEffect(() => {
+    if (isMobileMenuOpen) {
+      document.body.style.overflow = 'hidden';
+    } else {
+      document.body.style.overflow = '';
+    }
+    return () => {
+      document.body.style.overflow = '';
+    };
+  }, [isMobileMenuOpen]);
+
+  useKeyboard('Escape', () => setIsMobileMenuOpen(false));
+
+  const handleMobileLinkClick = (name: string) => {
+    setActiveItem(name);
+    setIsMobileMenuOpen(false);
+  };
+
   return (
-    <motion.div
-      className={`fixed top-6 left-1/2 -translate-x-1/2 z-40 transition-all duration-300 rounded-full px-6 py-3 flex items-center gap-6 ${
-        isScrolled 
-          ? 'bg-black/50 backdrop-blur-md border border-white/10 shadow-xl' 
-          : 'bg-transparent border-transparent'
-      }`}
-    >
-      {navItems.map((item) => (
-        <MagneticLink
-          key={item.name}
-          href={item.href}
-          isActive={activeItem === item.name}
-          onClick={() => setActiveItem(item.name)}
+    <>
+      {/* Desktop Navbar */}
+      <motion.div
+        className={`hidden md:flex fixed top-6 left-1/2 -translate-x-1/2 z-40 transition-all duration-300 rounded-full px-6 py-3 items-center gap-6 ${
+          isScrolled 
+            ? 'bg-black/50 backdrop-blur-md border border-white/10 shadow-xl' 
+            : 'bg-transparent border-transparent'
+        }`}
+      >
+        {navItems.map((item) => (
+          <MagneticLink
+            key={item.name}
+            href={item.href}
+            isActive={activeItem === item.name}
+            onClick={() => setActiveItem(item.name)}
+          >
+            {item.name}
+          </MagneticLink>
+        ))}
+      </motion.div>
+
+      {/* Mobile Navbar Header */}
+      <div 
+        className={`md:hidden fixed top-0 left-0 right-0 z-50 transition-all duration-300 px-4 py-4 flex items-center justify-end ${
+          isScrolled || isMobileMenuOpen
+            ? 'bg-black/80 backdrop-blur-md border-b border-white/10' 
+            : 'bg-transparent border-transparent'
+        }`}
+      >
+        <button 
+          onClick={() => setIsMobileMenuOpen(!isMobileMenuOpen)}
+          className="p-2 rounded-full bg-white/5 border border-white/10 text-white hover:bg-white/10 transition-colors"
         >
-          {item.name}
-        </MagneticLink>
-      ))}
-    </motion.div>
+          {isMobileMenuOpen ? <X size={20} /> : <Menu size={20} />}
+        </button>
+      </div>
+
+      {/* Mobile Menu Drawer */}
+      <AnimatePresence>
+        {isMobileMenuOpen && (
+          <motion.div
+            initial={{ opacity: 0, y: -20 }}
+            animate={{ opacity: 1, y: 0 }}
+            exit={{ opacity: 0, y: -20 }}
+            transition={{ duration: 0.2, ease: "easeOut" }}
+            className="md:hidden fixed inset-0 z-40 bg-black/95 backdrop-blur-xl flex flex-col items-center justify-center pt-16"
+          >
+            <div className="flex flex-col w-full max-w-sm px-6 gap-2">
+              {navItems.map((item) => (
+                <motion.a
+                  key={item.name}
+                  href={item.href}
+                  onClick={() => handleMobileLinkClick(item.name)}
+                  whileTap={{ scale: 0.95 }}
+                  className={`py-4 px-6 rounded-2xl border ${
+                    activeItem === item.name 
+                      ? 'bg-white/10 border-white/20 text-white font-semibold' 
+                      : 'bg-transparent border-transparent text-gray-400 hover:bg-white/5'
+                  } transition-colors text-center text-lg`}
+                >
+                  {item.name}
+                </motion.a>
+              ))}
+            </div>
+          </motion.div>
+        )}
+      </AnimatePresence>
+    </>
   );
 }
 

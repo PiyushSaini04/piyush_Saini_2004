@@ -30,7 +30,7 @@ export default function SkillsSection() {
   return (
     <section 
       id="skills" 
-      className="min-h-screen py-32 relative z-10 flex flex-col justify-center overflow-hidden"
+      className="py-20 md:py-32 relative z-10 flex flex-col justify-center overflow-hidden"
     >
       {/* Subtle Grid Background */}
       <div 
@@ -53,10 +53,10 @@ export default function SkillsSection() {
           transition={{ duration: 0.6 }}
           className="mb-16 md:mb-24 text-center md:text-left"
         >
-          <h2 className="text-4xl md:text-5xl font-display font-bold text-white mb-4 tracking-tight">
+          <h2 className="text-3xl md:text-4xl lg:text-5xl font-display font-bold text-white mb-4 tracking-tight">
             Technical Arsenal
           </h2>
-          <p className="text-gray-400 text-lg max-w-2xl">
+          <p className="text-gray-400 text-base md:text-lg max-w-2xl mx-auto md:mx-0">
             A structured index of languages, frameworks, and infrastructure tools utilized across various engineering projects.
           </p>
         </motion.div>

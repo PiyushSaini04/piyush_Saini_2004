@@ -20,8 +20,8 @@ export default function ContactSection() {
   };
 
   return (
-    <section id="contact" className="pt-24 relative z-10">
-      <div className="max-w-6xl w-full mx-auto px-6 pb-24">
+    <section id="contact" className="pt-16 md:pt-24 relative z-10">
+      <div className="max-w-6xl w-full mx-auto px-4 sm:px-6 pb-24">
         
         <div className="grid grid-cols-1 lg:grid-cols-2 gap-16">
           
@@ -32,11 +32,11 @@ export default function ContactSection() {
             whileInView="visible"
             viewport={{ once: true, margin: "-100px" }}
           >
-            <motion.h2 variants={itemVariants} className="text-4xl md:text-5xl   font-bold text-white mb-6">
+            <motion.h2 variants={itemVariants} className="text-3xl md:text-4xl lg:text-5xl font-bold text-white mb-4 md:mb-6">
               Let's create something together.
             </motion.h2>
             
-            <motion.p variants={itemVariants} className="text-gray-400 text-lg mb-12 max-w-md">
+            <motion.p variants={itemVariants} className="text-gray-400 text-base md:text-lg mb-8 md:mb-12 max-w-md">
               Whether you have a project in mind or just want to say hi, my inbox is always open.
             </motion.p>
             
@@ -66,7 +66,7 @@ export default function ContactSection() {
             initial="hidden"
             whileInView="visible"
             viewport={{ once: true, margin: "-100px" }}
-            className="bg-white/5 border border-white/10 rounded-3xl p-8"
+            className="bg-white/5 border border-white/10 rounded-2xl md:rounded-3xl p-5 md:p-8"
           >
             <form className="flex flex-col gap-6" onSubmit={(e) => e.preventDefault()}>
               <motion.div variants={itemVariants}>

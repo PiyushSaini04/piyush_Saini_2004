@@ -64,7 +64,7 @@ export default function PositionModal({ position, onClose }: PositionModalProps)
               animate={{ opacity: 1, scale: 1, y: 0 }}
               exit={{ opacity: 0, scale: 0.94, y: 16 }}
               transition={{ duration: 0.35, ease: [0.25, 0.46, 0.45, 0.94] }}
-              className="relative w-full max-w-4xl max-h-full bg-[#111111] border border-white/10 rounded-3xl overflow-hidden shadow-2xl flex flex-col"
+              className="relative w-full max-w-4xl max-h-[90vh] bg-[#111111] border border-white/10 rounded-2xl md:rounded-3xl overflow-hidden shadow-2xl flex flex-col"
               onClick={(e) => e.stopPropagation()}
             >
               {/* Close Button */}
@@ -75,9 +75,8 @@ export default function PositionModal({ position, onClose }: PositionModalProps)
                 <X size={20} />
               </button>
 
-              {/* Top: Slideshow */}
               <div 
-                className="w-full h-[30vh] sm:h-[40vh] bg-black/50 relative overflow-hidden group"
+                className="w-full h-[25vh] sm:h-[35vh] md:h-[40vh] bg-black/50 relative overflow-hidden group shrink-0"
                 onMouseEnter={() => setIsHovered(true)}
                 onMouseLeave={() => setIsHovered(false)}
               >
@@ -153,13 +152,12 @@ export default function PositionModal({ position, onClose }: PositionModalProps)
                 )}
               </div>
 
-              {/* Bottom: Content */}
-              <div className="w-full flex-1 p-8 sm:p-10 bg-white/5 overflow-y-auto scrollbar-thin scrollbar-thumb-white/10 scrollbar-track-transparent max-h-[50vh]">
-                <div className="mb-8">
-                  <h2 className="text-3xl md:text-4xl font-display font-bold text-white mb-2">
+              <div className="w-full flex-1 p-5 sm:p-8 md:p-10 bg-white/5 overflow-y-auto scrollbar-thin scrollbar-thumb-white/10 scrollbar-track-transparent">
+                <div className="mb-6 md:mb-8 pr-6">
+                  <h2 className="text-2xl md:text-3xl lg:text-4xl font-display font-bold text-white mb-2">
                     {position.role}
                   </h2>
-                  <div className="text-xl text-gray-300 font-medium mb-1">
+                  <div className="text-lg md:text-xl text-gray-300 font-medium mb-1">
                     {position.organization}
                   </div>
                   <div className="text-sm text-gray-500 uppercase tracking-wider">

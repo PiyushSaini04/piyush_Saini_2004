@@ -23,7 +23,7 @@ export default function CertLightbox({ cert, onClose }: CertLightboxProps) {
             animate={{ opacity: 1, backdropFilter: 'blur(16px)' }}
             exit={{ opacity: 0, backdropFilter: 'blur(0px)' }}
             transition={{ duration: 0.35, ease: [0.25, 0.46, 0.45, 0.94] }}
-            className="fixed inset-0 z-[100] flex items-center justify-center p-4 sm:p-6 bg-black/60"
+            className="fixed inset-0 z-[100] flex items-center justify-center p-4 sm:p-6 lg:p-12 bg-black/60"
             onClick={onClose}
           >
             <motion.div
@@ -43,7 +43,7 @@ export default function CertLightbox({ cert, onClose }: CertLightboxProps) {
               </button>
 
               {/* Image Section */}
-              <div className="w-full md:w-[60%] bg-black/50 relative overflow-hidden group min-h-[300px] md:min-h-[500px] flex items-center justify-center p-8">
+              <div className="w-full md:w-[60%] bg-black/50 relative overflow-hidden group min-h-[30vh] sm:min-h-[40vh] md:min-h-[500px] flex items-center justify-center p-4 md:p-8">
                 {/* Fallback pattern */}
                 <div className="absolute inset-0 bg-gradient-to-tr from-white/5 to-transparent opacity-50" />
                 
@@ -56,13 +56,13 @@ export default function CertLightbox({ cert, onClose }: CertLightboxProps) {
               </div>
 
               {/* Details Section */}
-              <div className="w-full md:w-[40%] p-8 md:p-12 flex flex-col justify-center bg-white/5">
+              <div className="w-full md:w-[40%] p-6 md:p-12 flex flex-col justify-center bg-white/5">
                 <div className="space-y-6">
                   <div>
-                    <h2 className="text-2xl md:text-3xl font-display font-bold text-white mb-3 leading-tight">
+                    <h2 className="text-xl sm:text-2xl md:text-3xl font-display font-bold text-white mb-2 md:mb-3 leading-tight">
                       {cert.title}
                     </h2>
-                    <div className="flex items-center gap-3 text-gray-400">
+                    <div className="flex flex-wrap items-center gap-2 md:gap-3 text-sm md:text-base text-gray-400">
                       <span className="font-semibold text-gray-300">{cert.issuer}</span>
                       <span>&bull;</span>
                       <span>{cert.date}</span>

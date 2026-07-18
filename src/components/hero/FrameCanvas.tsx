@@ -40,23 +40,32 @@ export default function FrameCanvas({ progress }: FrameCanvasProps) {
     ctx.clearRect(0, 0, rect.width, rect.height);
 
     // Contain
-    const scale = Math.min(
+    const isMobile = window.innerWidth < 768;
+
+    let scale = Math.min(
       rect.width / img.width,
       rect.height / img.height
     );
 
-    const drawWidth = img.width * scale;
-    const drawHeight = img.height * scale;
+    let offsetX = (rect.width - img.width * scale) / 2;
+    let offsetY = (rect.height - img.height * scale) / 2;
 
-    const offsetX = (rect.width - drawWidth) / 2;
-    const offsetY = (rect.height - drawHeight) / 2;
+    if (isMobile) {
+      // Cover the entire canvas (like background-size: cover)
+      scale = Math.max(rect.width / img.width, rect.height / img.height);
+      // Anchor to 60% from left of image where the subject sits
+      const focalX = img.width * 0.60;
+      const focalY = img.height * 0.45;
+      offsetX = rect.width / 2 - focalX * scale;
+      offsetY = rect.height / 2 - focalY * scale;
+    }
 
     ctx.drawImage(
       img,
       offsetX,
       offsetY,
-      drawWidth,
-      drawHeight
+      img.width * scale,
+      img.height * scale
     );
   };
 

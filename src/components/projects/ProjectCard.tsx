@@ -48,7 +48,7 @@ export default function ProjectCard({ project, onClick }: { project: Project, on
         rotateY,
         transformStyle: "preserve-3d",
       }}
-      className="group relative w-full h-[60vh] md:h-[500px] rounded-3xl bg-white/5 border border-white/10 backdrop-blur-sm overflow-hidden flex flex-col md:flex-row shadow-2xl cursor-pointer"
+      className="group relative w-full h-auto min-h-[280px] md:h-[500px] rounded-3xl bg-white/5 border border-white/10 backdrop-blur-sm overflow-hidden flex flex-col md:flex-row shadow-2xl cursor-pointer"
       onClick={onClick}
     >
       {/* 3D Inner Content */}
@@ -57,7 +57,7 @@ export default function ProjectCard({ project, onClick }: { project: Project, on
         className="w-full h-full flex flex-col md:flex-row relative z-10 p-1 pointer-events-none"
       >
         {/* Image Side */}
-        <div className="w-full md:w-1/2 h-1/2 md:h-full p-6 pb-0 md:pb-6 md:pr-0">
+        <div className="w-full md:w-1/2 aspect-video md:aspect-auto h-auto md:h-full p-4 md:p-6 pb-0 md:pb-6 md:pr-0">
           <div className="w-full h-full rounded-2xl overflow-hidden bg-white/5 border border-white/10 relative">
              <div className="absolute inset-0 bg-gradient-to-tr from-white/10 to-gray-500/10 flex items-center justify-center">
                 {/* Fallback text if image missing */}
@@ -77,10 +77,10 @@ export default function ProjectCard({ project, onClick }: { project: Project, on
         </div>
 
         {/* Text Side */}
-        <div className="w-full md:w-1/2 h-1/2 md:h-full p-8 md:p-12 flex flex-col justify-center gap-6">
+        <div className="w-full md:w-1/2 h-auto md:h-full p-6 md:p-12 flex flex-col justify-center gap-4 md:gap-6">
           <h3 
             style={{ transform: "translateZ(30px)" }}
-            className="text-3xl font-display font-bold text-white transition-all duration-300"
+            className="text-2xl md:text-3xl font-display font-bold text-white transition-all duration-300"
           >
             {project.title}
           </h3>
@@ -90,7 +90,7 @@ export default function ProjectCard({ project, onClick }: { project: Project, on
           
           <p 
             style={{ transform: "translateZ(20px)" }}
-            className="text-gray-400 text-lg leading-relaxed"
+            className="text-gray-400 text-sm md:text-lg leading-relaxed line-clamp-3 md:line-clamp-none"
           >
             {project.smallDescription}
           </p>

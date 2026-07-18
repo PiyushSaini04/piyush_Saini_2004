@@ -25,7 +25,7 @@ export default function HeroContent({ progress }: HeroContentProps) {
     <div className="w-full max-w-6xl mx-auto px-6 grid grid-cols-1 md:grid-cols-2 gap-8 items-center h-full pt-32">
       <div className="flex flex-col items-start gap-6 pointer-events-auto">
         <motion.div style={{ opacity: headlineOpacity, y: headlineY }}>
-          <h1 className="text-5xl md:text-7xl   font-bold leading-tight">
+          <h1 className="text-4xl md:text-5xl lg:text-7xl font-bold leading-tight">
             Building digital <br/>
             <span className="bg-clip-text text-transparent bg-gradient-to-r from-white to-gray-400">
               experiences
@@ -34,7 +34,7 @@ export default function HeroContent({ progress }: HeroContentProps) {
         </motion.div>
         
         <motion.div style={{ opacity: taglineOpacity, y: taglineY }}>
-          <p className="text-xl md:text-2xl text-gray-400 max-w-md">
+          <p className="text-lg md:text-xl lg:text-2xl text-gray-400 max-w-md">
             I'm Piyush Saini, a Full-Stack Developer creating cinematic and intelligent web applications.
           </p>
         </motion.div>
@@ -43,10 +43,10 @@ export default function HeroContent({ progress }: HeroContentProps) {
           style={{ opacity: ctaOpacity, y: ctaY }}
           className="flex flex-wrap gap-4 mt-4"
         >
-          <a href="#projects" className="px-8 py-4 rounded-full bg-white text-black font-semibold hover:scale-105 transition-transform duration-300">
+          <a href="#projects" className="px-5 py-3 md:px-8 md:py-4 rounded-full bg-white text-black text-sm md:text-base font-semibold hover:scale-105 transition-transform duration-300">
             View Projects
           </a>
-          <a href="/assets/resume/resume.pdf" target="_blank" className="px-8 py-4 rounded-full bg-white/10 backdrop-blur-md border border-white/20 text-white font-semibold hover:bg-white/20 transition-all duration-300">
+          <a href="/assets/resume/resume.pdf" target="_blank" className="px-5 py-3 md:px-8 md:py-4 rounded-full bg-white/10 backdrop-blur-md border border-white/20 text-white text-sm md:text-base font-semibold hover:bg-white/20 transition-all duration-300">
             Download Resume
           </a>
         </motion.div>

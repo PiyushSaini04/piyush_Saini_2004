@@ -1,10 +1,11 @@
 'use client';
 
-import { useRef, useState, useTransition } from 'react';
+import { useRef, useState } from 'react';
 import { motion, useScroll, useTransform, useSpring } from 'framer-motion';
 import { projects, Project } from '@/data/projects';
 import ProjectCard from './ProjectCard';
 import ProjectModal from './ProjectModal';
+import { useTransition } from '@/components/transitions/TransitionContext';
 import { useRouter } from 'next/navigation';
 import { ArrowRight, Loader2 } from 'lucide-react';
 
@@ -22,15 +23,12 @@ export default function ProjectsSection() {
     restDelta: 0.001
   });
 
-  const x = useTransform(smoothProgress, [0, 1], ["0%", "-75%"]);
+  const { navigate } = useTransition();
 
-  const router = useRouter();
-  const [isPending, startTransition] = useTransition();
 
-  const handleViewAll = () => {
-    startTransition(() => {
-      router.push('/projects');
-    });
+  const handleViewAll = (e: React.MouseEvent<HTMLAnchorElement>) => {
+    e.preventDefault();
+    navigate('/projects', 'forward');
   };
 
   return (
@@ -46,8 +44,7 @@ export default function ProjectsSection() {
           </div>
 
           {/* Desktop Horizontal Scroll Container */}
-          <motion.div 
-            style={{ x }} 
+          <motion.div  
             className="flex gap-16 px-24 h-[60vh] items-center pr-250"
           >
             {projects.map((project) => (
@@ -87,7 +84,7 @@ export default function ProjectsSection() {
       </section>
 
       {/* Mobile View (Teaser Block) */}
-      <section id="projects-mobile" className="md:hidden py-16 px-6 relative z-10">
+      <section id="projects-mobile" className="md:hidden py-10 px-6 relative z-10">
         <h2 className="text-3xl font-display font-bold text-white mb-8">
           Projects
         </h2>
@@ -97,19 +94,13 @@ export default function ProjectsSection() {
             <ProjectCard key={project.id} project={project} onClick={() => setSelectedProject(project)} />
           ))}
           
-          <button 
+          <a
+            href="/projects"
             onClick={handleViewAll}
-            disabled={isPending}
             className="w-full mt-4 flex items-center justify-center gap-2 bg-white/10 hover:bg-white/20 border border-white/20 text-white py-4 rounded-xl font-medium transition-colors"
-          >
-            {isPending ? (
-              <Loader2 size={18} className="animate-spin" />
-            ) : (
-              <>
-                View All Projects <ArrowRight size={18} />
-              </>
-            )}
-          </button>
+          >           
+            View All Projects <ArrowRight size={18} />
+          </a>
         </div>
       </section>
 

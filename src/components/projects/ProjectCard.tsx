@@ -48,17 +48,17 @@ export default function ProjectCard({ project, onClick }: { project: Project, on
         rotateY,
         transformStyle: "preserve-3d",
       }}
-      className="group relative w-full h-auto min-h-[280px] md:h-[500px] rounded-3xl bg-white/5 border border-white/10 backdrop-blur-sm overflow-hidden flex flex-col md:flex-row shadow-2xl cursor-pointer"
+      className="group relative w-full h-auto min-h-[280px] md:h-[500px] rounded-2xl bg-white/5 border border-white/10 backdrop-blur-sm overflow-hidden flex flex-col md:flex-row shadow-2xl cursor-pointer"
       onClick={onClick}
     >
       {/* 3D Inner Content */}
       <div 
         style={{ transform: "translateZ(50px)", transformStyle: "preserve-3d" }}
-        className="w-full h-full flex flex-col md:flex-row relative z-10 p-1 pointer-events-none"
+        className="w-full h-auto flex flex-col md:flex-row relative z-10 p-1 pointer-events-none"
       >
         {/* Image Side */}
-        <div className="w-full md:w-1/2 aspect-video md:aspect-auto h-auto md:h-full p-4 md:p-6 pb-0 md:pb-6 md:pr-0">
-          <div className="w-full h-full rounded-2xl overflow-hidden bg-white/5 border border-white/10 relative">
+        <div className="w-full md:w-1/2 aspect-video md:aspect-auto h-auto md:h-full p-2 md:p-6 pb-0 md:pb-6 md:pr-0">
+          <div className="w-full h-full rounded-xl overflow-hidden bg-white/5 border border-white/10 relative">
              <div className="absolute inset-0 bg-gradient-to-tr from-white/10 to-gray-500/10 flex items-center justify-center">
                 {/* Fallback text if image missing */}
                 <span className="text-gray-500 font-display font-semibold tracking-widest uppercase">
@@ -77,7 +77,7 @@ export default function ProjectCard({ project, onClick }: { project: Project, on
         </div>
 
         {/* Text Side */}
-        <div className="w-full md:w-1/2 h-auto md:h-full p-6 md:p-12 flex flex-col justify-center gap-4 md:gap-6">
+        <div className="w-full md:w-1/2 h-auto md:h-full p-4 md:p-12 flex flex-col justify-center gap-2 md:gap-6">
           <h3 
             style={{ transform: "translateZ(30px)" }}
             className="text-2xl md:text-3xl font-display font-bold text-white transition-all duration-300"
@@ -97,23 +97,16 @@ export default function ProjectCard({ project, onClick }: { project: Project, on
 
           <div 
             style={{ transform: "translateZ(25px)" }}
-            className="flex flex-wrap gap-2 pt-2"
+            className="flex flex-wrap gap-2 pt-1"
           >
             {project.tags.map(tag => (
-              <span key={tag} className="px-3 py-1 rounded-full bg-white/5 border border-white/10 text-xs text-gray-300">
+              <span key={tag} className="px-3 py-1 rounded-full bg-white/5 border border-white/10 text-[11px] text-gray-300">
                 {tag}
               </span>
             ))}
           </div>
 
-          <div 
-            style={{ transform: "translateZ(40px)" }}
-            className="flex gap-4 pt-4 mt-auto md:mt-0 pointer-events-auto opacity-0 group-hover:opacity-100 transition-opacity duration-300"
-          >
-             <span className="inline-flex items-center gap-2 px-4 py-2 bg-white/10 border border-white/20 text-white rounded-full text-sm font-medium">
-               View Details
-             </span>
-          </div>
+          
         </div>
       </div>
       

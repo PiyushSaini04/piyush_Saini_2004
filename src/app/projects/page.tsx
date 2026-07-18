@@ -4,6 +4,7 @@ import { useState } from 'react';
 import { useRouter } from 'next/navigation';
 import { motion, AnimatePresence } from 'framer-motion';
 import { ArrowLeft } from 'lucide-react';
+import { useTransition } from '@/components/transitions/TransitionContext';
 import { projects, Project } from '@/data/projects';
 import ProjectCard from '@/components/projects/ProjectCard';
 import ProjectModal from '@/components/projects/ProjectModal';
@@ -11,7 +12,14 @@ import Footer from '@/components/contact/Footer';
 
 export default function ProjectsPage() {
   const router = useRouter();
+  const { navigate } = useTransition();
+
   const [selectedProject, setSelectedProject] = useState<Project | null>(null);
+
+  const handleBack = (e: React.MouseEvent<HTMLAnchorElement>) => {
+    e.preventDefault();
+    navigate('/#projects', 'back');
+  };
 
   return (
     <main className="min-h-screen relative bg-[#050505]">
@@ -22,13 +30,14 @@ export default function ProjectsPage() {
       </div>
 
       <div className="relative z-10 px-4 sm:px-6 py-8">
-        <button 
-          onClick={() => router.back()}
-          className="flex items-center gap-2 text-gray-400 hover:text-white transition-colors mb-8"
-        >
-          <ArrowLeft size={20} />
-          <span>Back to Home</span>
-        </button>
+        <a 
+              href="/#projects"
+              onClick={handleBack}
+              className="inline-flex items-center gap-2 text-gray-400 hover:text-white transition-colors mb-8"
+            >
+              <ArrowLeft size={20} />
+              Back to Portfolio
+            </a>
 
         <h1 className="text-4xl font-display font-bold text-white mb-8">
           All Projects

@@ -11,6 +11,15 @@ import CertLightbox from './CertLightbox';
 export default function CertTeaser() {
   const [hoveredImage, setHoveredImage] = useState<string | null>(null);
   const [selectedCert, setSelectedCert] = useState<Certificate | null>(null);
+  const [isdesktop, setIsDesktop] = useState<boolean>(true);
+
+  const x = window.innerWidth;
+  if (x < 768 && isdesktop) {
+    setIsDesktop(false);
+  } else if (x >= 768 && !isdesktop) {
+    setIsDesktop(true);
+  }
+
   const teaserCerts = certificates.slice(0, 4); // Only show first 4
   const { navigate } = useTransition();
 
@@ -23,22 +32,25 @@ export default function CertTeaser() {
     <section id="certificates" className="py-16 md:py-24 relative z-10">
       <div className="max-w-6xl w-full mx-auto px-4 sm:px-6">
         
-        <div className="flex flex-col md:flex-row justify-between items-end mb-12 gap-6">
+        <div className="flex flex-col md:flex-row justify-between items-center mb-12 gap-6">
           <div>
-            <h2 className="text-3xl md:text-4xl lg:text-5xl font-bold text-white mb-2 md:mb-4">
+            <h2 className="text-3xl md:text-4xl lg:text-5xl font-bold text-white mb-2 md:mb-4 mx-auto md:mx-0 text-center md:text-left">
               Certifications
             </h2>
             <p className="text-gray-400 text-sm md:text-base">Continuous learning and skill validation.</p>
           </div>
           
-          <a 
-            href="/certificates"
-            onClick={handleNavigate}
-            className="px-6 py-3 rounded-full bg-white/10 text-white font-medium hover:bg-white/20 transition-colors shrink-0"
-          >
-            View All
-          </a>
+          {isdesktop && (
+            <a 
+              href="/certificates"
+              onClick={handleNavigate}
+              className="px-6 py-3 rounded-full bg-white/10 text-white font-medium hover:bg-white/20 transition-colors shrink-0"
+            >
+              View All
+            </a>
+          )}
         </div>
+        
 
         <div className="grid grid-cols-1 md:grid-cols-2 gap-4 md:gap-6">
           {teaserCerts.map((cert, index) => (
@@ -67,6 +79,15 @@ export default function CertTeaser() {
             </motion.div>
           ))}
         </div>
+        {!isdesktop && (
+            <a 
+              href="/certificates"
+              onClick={handleNavigate}
+              className="px-6 py-3 rounded-full bg-white/10 text-white font-medium hover:bg-white/20 transition-colors shrink-0 mx-auto mt-6 block text-center"
+            >
+              View All
+            </a>
+          )}
 
       </div>
 

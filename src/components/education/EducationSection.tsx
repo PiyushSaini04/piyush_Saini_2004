@@ -16,7 +16,7 @@ export default function EducationSection() {
   const scaleY = useTransform(scrollYProgress, [0, 1], [0, 1]);
 
   return (
-    <section id="education" className="py-16 md:min-h-screen md:py-24 relative z-10" ref={containerRef}>
+    <section id="education" className="py-10 md:min-h-screen md:py-24 relative z-10" ref={containerRef}>
       <div className="max-w-4xl w-full mx-auto px-6">
         
         <div className="text-center mb-12 md:mb-24">
@@ -24,7 +24,7 @@ export default function EducationSection() {
             initial={{ opacity: 0, y: 20 }}
             whileInView={{ opacity: 1, y: 0 }}
             viewport={{ once: true }}
-            className="text-3xl md:text-4xl lg:text-5xl font-bold text-white mb-4"
+            className="text-3xl md:text-4xl lg:text-5xl font-bold text-white mb-2"
           >
             Academic Journey
           </motion.h2>
@@ -51,9 +51,9 @@ export default function EducationSection() {
                   <motion.div 
                     initial={{ opacity: 0, x: isEven ? 50 : -50 }}
                     whileInView={{ opacity: 1, x: 0 }}
-                    viewport={{ once: true, margin: "-100px" }}
+                    viewport={{ once: true, margin: "-80px" }}
                     transition={{ duration: 0.6, ease: "easeOut" }}
-                    className={`w-full md:w-1/2 p-5 md:p-8 bg-white/5 border border-white/10 rounded-2xl backdrop-blur-sm ${isEven ? 'md:ml-12' : 'md:mr-12'}`}
+                    className={`w-full md:w-1/2 p-4 md:p-8 bg-white/5 border border-white/10 rounded-2xl backdrop-blur-sm ${isEven ? 'md:ml-12' : 'md:mr-12'}`}
                   >
                     <div className="text-gray-400 font-semibold mb-2 text-xs md:text-sm uppercase tracking-wider">{edu.date}</div>
                     <h3 className="text-xl md:text-2xl font-bold text-white mb-2">{edu.degree}</h3>

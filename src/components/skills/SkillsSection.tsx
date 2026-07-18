@@ -30,7 +30,7 @@ export default function SkillsSection() {
   return (
     <section 
       id="skills" 
-      className="py-20 md:py-32 relative z-10 flex flex-col justify-center overflow-hidden"
+      className="py-5 md:py-32 relative z-10 flex flex-col justify-center overflow-hidden"
     >
       {/* Subtle Grid Background */}
       <div 
@@ -45,7 +45,7 @@ export default function SkillsSection() {
       />
       
 
-      <div className="max-w-5xl w-full mx-auto px-6 relative z-10">
+      <div className="max-w-5xl w-full mx-auto px-4 relative z-10">
         <motion.div 
           initial={{ opacity: 0, y: 20 }}
           whileInView={{ opacity: 1, y: 0 }}
@@ -53,7 +53,7 @@ export default function SkillsSection() {
           transition={{ duration: 0.6 }}
           className="mb-16 md:mb-24 text-center md:text-left"
         >
-          <h2 className="text-3xl md:text-4xl lg:text-5xl font-display font-bold text-white mb-4 tracking-tight">
+          <h2 className="text-3xl md:text-4xl lg:text-5xl font-display font-bold text-white mb-2 tracking-tight">
             Technical Arsenal
           </h2>
           <p className="text-gray-400 text-base md:text-lg max-w-2xl mx-auto md:mx-0">
@@ -69,13 +69,13 @@ export default function SkillsSection() {
           className="w-full flex flex-col"
         >
           {/* Top Border */}
-          <div className="w-full h-px bg-white/10 mb-2" />
+          <div className="w-full h-px bg-white/10 mb-1" />
 
           {skillCategories.map((category, index) => (
             <motion.div 
               key={category.category}
               variants={itemVariants}
-              className="group flex flex-col md:flex-row py-6 md:py-8 border-b border-white/5 hover:bg-white/[0.02] transition-colors duration-300"
+              className="group flex flex-col md:flex-row py-4 md:py-8 border-b border-white/5 hover:bg-white/[0.02] transition-colors duration-300"
             >
               {/* Category Name */}
               <div className="w-full md:w-64 shrink-0 mb-4 md:mb-0 md:pr-8 flex items-start">

@@ -69,9 +69,9 @@ export default function Navbar() {
 
       {/* Mobile Navbar Header */}
       <div 
-        className={`md:hidden fixed top-0 left-0 right-0 z-50 transition-all duration-300 px-4 py-4 flex items-center justify-end ${
+        className={`md:hidden fixed top-0 left-0 right-0 z-50 transition-all duration-300 px-4 py-2 flex items-center justify-end ${
           isScrolled || isMobileMenuOpen
-            ? 'bg-black/80 backdrop-blur-md border-b border-white/10' 
+            ? 'bg-transparent backdrop-blur-md ' 
             : 'bg-transparent border-transparent'
         }`}
       >
@@ -91,9 +91,9 @@ export default function Navbar() {
             animate={{ opacity: 1, y: 0 }}
             exit={{ opacity: 0, y: -20 }}
             transition={{ duration: 0.2, ease: "easeOut" }}
-            className="md:hidden fixed inset-0 z-40 bg-black/95 backdrop-blur-xl flex flex-col items-center justify-center pt-16"
+            className="md:hidden fixed inset-0 z-40 bg-black/95 backdrop-blur-xl flex flex-col items-center justify-center"
           >
-            <div className="flex flex-col w-full max-w-sm px-6 gap-2">
+            <div className="flex flex-col w-full max-w-sm px-4 gap-2">
               {navItems.map((item) => (
                 <motion.a
                   key={item.name}

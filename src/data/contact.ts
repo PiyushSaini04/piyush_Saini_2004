@@ -1,11 +1,11 @@
 export const contactData = {
-  email: 'hello@piyushsaini.com',
-  phone: '+91 98765 43210',
-  location: 'New Delhi, India',
+  email: 'piyushsaini0404@gmail.com',
+  phone: '+91 9667169762',
+  location: 'Phagwara, Punjab, India',
   socials: [
-    { name: 'GitHub', url: '#', icon: 'Github' },
-    { name: 'LinkedIn', url: '#', icon: 'Linkedin' },
-    { name: 'Twitter', url: '#', icon: 'Twitter' },
-    { name: 'Instagram', url: '#', icon: 'Instagram' },
+    { name: 'GitHub', url: 'https://github.com/PiyushSaini04', icon: 'Github' },
+    { name: 'LinkedIn', url: 'https://linkedin.com/in/piyushsaini2004', icon: 'Linkedin' },
+    // { name: 'Twitter', url: '#', icon: 'Twitter' },
+    // { name: 'Instagram', url: '#', icon: 'Instagram' },
   ]
 };

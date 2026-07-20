@@ -4,8 +4,72 @@ import { motion, Variants } from 'framer-motion';
 import { contactData } from '@/data/contact';
 import SocialIcon from './SocialIcon';
 import Footer from './Footer';
+import { useState } from 'react';
 
 export default function ContactSection() {
+  const [formData, setFormData] = useState({
+    name: '',
+    email: '',
+    message: '',
+  });
+
+  const [loading, setLoading] = useState(false);
+  const [status, setStatus] = useState<{
+    type: 'success' | 'error';
+    message: string;
+  } | null>(null);
+
+  const handleChange = (
+    e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>
+  ) => {
+    setFormData((prev) => ({
+      ...prev,
+      [e.target.name]: e.target.value,
+    }));
+  };
+
+  const handleSubmit = async (e: React.FormEvent) => {
+    e.preventDefault();
+
+    setLoading(true);
+    setStatus(null);
+
+    try {
+      const res = await fetch("/api/contact", {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify(formData),
+      });
+
+      const data = await res.json();
+
+      if (!res.ok) {
+        throw new Error(data.error);
+      }
+
+      setStatus({
+        type: "success",
+        message: "Message sent successfully!",
+      });
+
+      setFormData({
+        name: "",
+        email: "",
+        message: "",
+      });
+
+    } catch (err) {
+      setStatus({
+        type: "error",
+        message: "Unable to send message.",
+      });
+    }
+
+    setLoading(false);
+  };
+
   const containerVariants: Variants = {
     hidden: { opacity: 0 },
     visible: {
@@ -68,28 +132,56 @@ export default function ContactSection() {
             viewport={{ once: true, margin: "-100px" }}
             className="bg-white/5 border border-white/10 rounded-2xl md:rounded-3xl p-5 md:p-8"
           >
-            <form className="flex flex-col gap-6" onSubmit={(e) => e.preventDefault()}>
+            <form className="flex flex-col gap-6" onSubmit={handleSubmit}>
               <motion.div variants={itemVariants}>
                 <label className="block text-sm font-medium text-gray-400 mb-2">Name</label>
-                <input type="text" className="w-full bg-black/50 border border-white/10 rounded-xl px-4 py-3 text-white focus:outline-none focus:border-white/30 transition-colors" placeholder="John Doe" />
+                <input 
+                type="text"
+                name="name"
+                value={formData.name}
+                onChange={handleChange} 
+                className="w-full bg-black/50 border border-white/10 rounded-xl px-4 py-3 text-white focus:outline-none focus:border-white/30 transition-colors" placeholder="John Doe" />
               </motion.div>
               
               <motion.div variants={itemVariants}>
                 <label className="block text-sm font-medium text-gray-400 mb-2">Email</label>
-                <input type="email" className="w-full bg-black/50 border border-white/10 rounded-xl px-4 py-3 text-white focus:outline-none focus:border-white/30 transition-colors" placeholder="john@example.com" />
+                <input 
+                type="email"
+                name="email"
+                value={formData.email}
+                onChange={handleChange}
+                className="w-full bg-black/50 border border-white/10 rounded-xl px-4 py-3 text-white focus:outline-none focus:border-white/30 transition-colors" placeholder="john@example.com" />
               </motion.div>
               
               <motion.div variants={itemVariants}>
                 <label className="block text-sm font-medium text-gray-400 mb-2">Message</label>
-                <textarea rows={4} className="w-full bg-black/50 border border-white/10 rounded-xl px-4 py-3 text-white focus:outline-none focus:border-white/30 transition-colors resize-none" placeholder="Hello..." />
+                <textarea 
+                name="message"
+                value={formData.message}
+                onChange={handleChange}
+                rows={4} className="w-full bg-black/50 border border-white/10 rounded-xl px-4 py-3 text-white focus:outline-none focus:border-white/30 transition-colors resize-none" placeholder="Hello..." />
               </motion.div>
               
               <motion.button 
                 variants={itemVariants}
-                className="w-full bg-white text-black font-semibold rounded-xl py-4 mt-2 hover:bg-gray-200 transition-colors"
+                disabled={loading}
+                
+                className="w-full bg-white text-black font-semibold rounded-xl py-4 mt-2 hover:bg-gray-200 transition-colors disabled:opacity-50 disabled:cursor-not-allowed"
               >
-                Send Message
+                {loading ? "Sending..." : "Send Message"}
               </motion.button>
+
+              {status && (
+                <p
+                  className={`text-sm mt-3 ${
+                    status.type === "success"
+                      ? "text-green-400"
+                      : "text-red-400"
+                  }`}
+                >
+                  {status.message}
+                </p>
+              )}
             </form>
           </motion.div>
           

@@ -24,40 +24,6 @@ export default function ExperienceSection() {
 
   return (
     <section id="experience" className="py-16 md:py-24 relative z-10">
-      <div className="max-w-6xl w-full mx-auto px-4 sm:px-6">
-          {/* Timeline Column */}
-        <div>
-          <motion.h2 
-            initial={{ opacity: 0, y: 20 }}
-            whileInView={{ opacity: 1, y: 0 }}
-            viewport={{ once: true }}
-            className="text-3xl md:text-4xl lg:text-5xl font-display font-bold text-white mb-10 md:mb-16 text-center lg:text-left"
-          >
-            Experience
-          </motion.h2>
-          <div className="relative pl-8 max-w-2xl mx-auto lg:mx-0">
-            <TimelineDraw />
-            
-            <div className="space-y-10 md:space-y-16">
-              {experiences.map((exp, index) => (
-                <motion.div 
-                  key={exp.id} 
-                  variants={itemVariants}
-                  initial="hidden"
-                  whileInView="visible"
-                  viewport={{ once: true, margin: "-100px" }}
-                  className="relative z-10"
-                >
-                  <div className="text-gray-300 font-semibold mb-1">{exp.date}</div>
-                  <h3 className="text-2xl font-display font-bold text-white mb-1">{exp.title}</h3>
-                  <div className="text-gray-400 font-medium mb-4">{exp.company}</div>
-                  <p className="text-gray-400 leading-relaxed">{exp.description}</p>
-                </motion.div>
-              ))}
-            </div>
-          </div>
-        </div>
-      </div>
       <div className="w-full max-w-7xl mx-auto px-4 sm:px-6">
         {/* Heading */}
         <motion.h2

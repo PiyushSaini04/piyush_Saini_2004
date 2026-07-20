@@ -17,6 +17,8 @@ export default function ProjectsSection() {
     target: targetRef,
   });
 
+  const x = useTransform(scrollYProgress, [0, 1], ['0%', '-100%']);
+
   const smoothProgress = useSpring(scrollYProgress, {
     stiffness: 100,
     damping: 30,
@@ -45,7 +47,8 @@ export default function ProjectsSection() {
 
           {/* Desktop Horizontal Scroll Container */}
           <motion.div  
-            className="flex gap-16 px-24 h-[60vh] items-center pr-250"
+            className="flex gap-16 px-24 h-[60vh] items-center "
+            style={{ x }}
           >
             {projects.map((project) => (
               <div key={project.id} className="w-[80vw] max-w-[1000px] shrink-0">

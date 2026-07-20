@@ -20,7 +20,7 @@ export default function Home() {
       <AboutSection />
       <SkillsSection />
       <ProjectsSection />
-      {/* <ExperienceSection /> */}
+      <ExperienceSection />
       <PositionTeaser />
       <EducationSection />
       <CertTeaser />

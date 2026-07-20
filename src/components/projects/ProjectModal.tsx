@@ -80,7 +80,7 @@ export default function ProjectModal({ project, onClose }: ProjectModalProps) {
                       animate={{ opacity: 1, scale: 1 }}
                       exit={{ opacity: 0, scale: 0.95 }}
                       transition={{ duration: 0.3 }}
-                      className="absolute inset-0 w-full h-full object-cover z-10"
+                      className="absolute inset-0 w-full object-cover z-10 my-auto"
                     />
                   </AnimatePresence>
 
